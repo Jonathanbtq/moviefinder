@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react"
 import SearshBar from "../components/SearshBar"
 import MovieContent from "../components/MovieContent"
+import MenuButton from "../components/MenuButton"
 
 import '../assets/styles/moviecontent.css'
+import '../assets/styles/menubutton.css'
 
 export default function Home(){
     const [movie, setMovie] = useState([])
@@ -35,7 +37,8 @@ export default function Home(){
     return(
         <>
             <h1>Trouve ton film en quelques secondes</h1>
-            <SearshBar updateMovie={UpdateMovieFind} />
+            <SearshBar updateMovie={setMovie} />
+            <MenuButton updateMovie={setMovie}/>
             <MovieContent movie={movie} />
         </>
     )

@@ -17,11 +17,15 @@ export default function MovieContent({ movie }){
                 <div className="mov_ctn_div">
                     {movie.map((movie, index) => (
                         <div key={index} className="movie_card">
-                            <h3>{movie.title}</h3>
                             <img
                                 src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
                                 alt={`Poster for ${movie.title}`}
                             />
+                            <div className="mov_ctn_otherinfo">
+                                {movie.adult === false ? <p>Tout public</p> : <p>Adult</p>}
+                                <p>{movie.original_language}</p>
+                            </div>
+                            <h3>{movie.title}</h3>
                             <p className="mov_ctn_overview">{movie.overview}</p>
                             <div className="mov_ctn_info">
                                 <div className="mov_ctn_ltlinfo">
