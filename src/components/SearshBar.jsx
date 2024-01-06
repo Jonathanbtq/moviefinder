@@ -1,14 +1,14 @@
 import { useState } from "react"
 
-export default function SearshBar(){
-    const [movie, setMovie] = useState('')
+export default function SearshBar({ setMovie }){
+    const [findSearch, setFindSearch] = useState('')
 
     const searshMovie = (e) => {
         e.preventDefault()
         const form = e.target
         const formData = new FormData(form)
         let recherche = formData.get('recherche')
-        setMovie(recherche)
+        setFindSearch(recherche)
     }
 
     return (
