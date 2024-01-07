@@ -10,111 +10,61 @@ export default function MenuButton({ updateMovie }){
         }
     };
 
-    // const fetchData = (endpoint) => {
-    //     return fetch(`${apiBaseUrl}/${endpoint}`, options)
-    //         .then(response => response.json())
-    //         .catch(error => {
-    //             console.error(error);
-    //             throw error;
-    //         });
-    // }
+    const fetchData = async (baseurl) => {
+        fetch(baseurl)
+            .then(response => response.json())
+            .then(response => {
+                updateMovie(response.results)
+            })
+            .catch(err => {
+                console.error(err)
+            })
+    }
 
-    // const getRandomMovieId = (response) => {
-    //     if (response.length === 0) {
-    //         return null
-    //     }
-
-    //     const newMovieIds = response.map(movie => movie.id)
-    //     const randomIndex = Math.floor(Math.random() * newMovieIds.length)
-    //     return newMovieIds[randomIndex]
-    // }
-
-    // const changeMovieButton = (state) => {
-    //     switch (state) {
-    //         case 'toprated':
-    //         case 'endiffusion':
-    //         case 'avenir':
-    //         case 'hasard':
-    //             fetchData(`${state}?language=fr&page=1&region=fr`);
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    // };
-
-    // const handleRandomMovie = () => {
-    //     fetchData('popular?language=fr&page=1&region=fr')
-    //         .then(response => {
-    //             console.log(response);
-    //             const randomMovieId = getRandomMovieId(response);
     
-    //             if (randomMovieId) {
-    //                 return fetchData(`${randomMovieId}?language=fr`);
-    //             }
-    //         })
-    //         .then(data => {
-    //             if (data) {
-    //                 updateMovie(data);
-    //             }
-    //         })
-    //         .catch(err => {
-    //             console.error(err);
-    //         });
-    // };
-
-    const changeMovieButton = (state) => {
-
-        const randomMovie = (response) => {
-            if (response.length === 0) {
-                return null;
-            }
-
-            const newMovieId = []
-            response.forEach(movie => {
-                newMovieId.push(movie.id)
-            });
-            const random = Math.floor(Math.random()* newMovieId.length)
-            const randomId = newMovieId[random];
-            return randomId
-        }
-
-        
-        if (state === 'upcoming') {    
-              fetch(`${apiBaseUrl}/upcoming?language=fr&page=1&region=fr`, options)
-                .then(response => response.json())
-                .then(response => {
-                    updateMovie(response.results)
-                })
-                .catch(err => console.error(err));
-        } else if (state === 'top_rated') {
-            fetch(`${apiBaseUrl}/top_rated?language=fr&page=1&region=fr`, options)
-                .then(response => response.json())
-                .then(response => {
-                    updateMovie(response.results)
-                })
-                .catch(err => console.error(err));
-        } else if (state === 'now_playing') {
-              fetch(`${apiBaseUrl}/now_playing??language=fr&page=1&region=fr`, options)
-                .then(response => response.json())
-                .then(response => {
-                    updateMovie(response.results)
-                })
-                .catch(err => console.error(err));
-        } else if (state === 'hasard') {
-            fetch(`${apiBaseUrl}/popular?language=fr&page=1&region=fr`, options)
-                .then(response => response.json())
-                .then(response => {
-                    let randomData = randomMovie(response.results)
-                    fetch(`https://api.themoviedb.org/3/movie/${randomData}?language=en-US`, options)
+    const handleRandomMovie = () => {
+        fetch(`${apiBaseUrl}/popular?language=fr&page=1&region=fr`, options)
+            .then(response => response.json())
+            .then(response => {
+                const randomId = handleRandom(response.results)
+                if(randomId){
+                    fetch(`${apiBaseUrl}/${randomId}?language=fr&page=1&region=fr`, options)
                         .then(response => response.json())
                         .then(response => {
-                            updateMovie(response)
+                            if (response) {
+                                updateMovie(response)
+                            }
                         })
-                        .catch(err => console.error(err));
-                })
-                .catch(err => console.error(err));
+                }
+            })
+    }
+
+    const handleRandom = (response) => {
+        if (response.length === 0) {
+            return null;
+        }
+
+        const newMovieId = []
+        response.forEach(movie => {
+            newMovieId.push(movie.id)
+        });
+        const random = Math.floor(Math.random()* newMovieId.length)
+        const randomId = newMovieId[random];
+        return randomId
+    }
+
+    const changeMovieButton = (state) => {
+        switch (state) {
+            case 'upcoming':
+            case 'top_rated':
+            case 'now_playing':
+                fetchData(`${apiBaseUrl}/${state}?language=fr&page=1&region=fr`)
+                break
+            default:
+                break
         }
     }
+    
     return (
         <>
             <div className="button_div">
@@ -127,7 +77,7 @@ export default function MenuButton({ updateMovie }){
                 <button onClick={() => changeMovieButton('upcoming')}>
                     <p>A venir</p>
                 </button>
-                <button onClick={() => changeMovieButton('hasard')}>
+                <button onClick={() => handleRandomMovie()}>
                     <p>Aléatoire</p>
                 </button>
             </div>
