@@ -23,6 +23,10 @@
     align-items: center;
     width: 20%;
     margin: 0 0 20px 0;
+    cursor: pointer;
+}
+.movie_card:hover{
+    
 }
 .mov_ctn_otherinfo{
     display: flex;

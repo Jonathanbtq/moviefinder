@@ -11,7 +11,7 @@ export default function MenuButton({ updateMovie }){
     };
 
     const fetchData = async (baseurl) => {
-        fetch(baseurl)
+        fetch(baseurl, options)
             .then(response => response.json())
             .then(response => {
                 updateMovie(response.results)
@@ -20,7 +20,6 @@ export default function MenuButton({ updateMovie }){
                 console.error(err)
             })
     }
-
     
     const handleRandomMovie = () => {
         fetch(`${apiBaseUrl}/popular?language=fr&page=1&region=fr`, options)
@@ -58,13 +57,13 @@ export default function MenuButton({ updateMovie }){
             case 'upcoming':
             case 'top_rated':
             case 'now_playing':
-                fetchData(`${apiBaseUrl}/${state}?language=fr&page=1&region=fr`)
+                fetchData(`${apiBaseUrl}/${state}?language=fr&page=1&region=fr`, options)
                 break
             default:
                 break
         }
     }
-    
+
     return (
         <>
             <div className="button_div">

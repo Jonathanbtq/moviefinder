@@ -5,6 +5,9 @@ import MenuButton from "../components/MenuButton"
 
 import '../assets/styles/moviecontent.css'
 import '../assets/styles/menubutton.css'
+import '../assets/styles/searshbar.css'
+import '../assets/styles/pages/home.css'
+import '../main.css'
 
 export default function Home(){
     const [movie, setMovie] = useState([])
@@ -44,10 +47,12 @@ export default function Home(){
 
     return(
         <>
-            <h1>Trouve ton film en quelques secondes</h1>
-            <SearshBar updateMovie={setMovie} options={options} />
-            <MenuButton updateMovie={setMovie}  options={options}/>
-            <MovieContent movie={movie} />
+            <div className="home_ctn">
+                <h1 className="home_h1">Trouve ton film en quelques secondes</h1>
+                <SearshBar updateMovie={setMovie} options={options} />
+                <MenuButton updateMovie={setMovie}  options={options}/>
+                <MovieContent movie={movie} />
+            </div>
         </>
     )
 }

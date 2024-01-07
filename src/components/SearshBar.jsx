@@ -17,10 +17,12 @@ export default function SearshBar({ updateMovie, options }){
 
     return (
         <>
-            <form action="" onSubmit={handleSubmitMovie}>
-                <input type="text" name="recherche" placeholder="Un film?"/>
-                <input type="submit" placeholder="Recherchez" />
-            </form>
+            <div className="searsh_div">
+                <form action="" onSubmit={handleSubmitMovie}>
+                    <input type="text" name="recherche" placeholder="Un film?"/>
+                    <input type="submit" placeholder="Recherchez"/>
+                </form>
+            </div>
         </>
     )
 }

@@ -2,8 +2,7 @@ import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home"
 import Service from "./services/services"
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import Movie from './pages/Movie';
 
 function App() {
   return (
@@ -11,6 +10,7 @@ function App() {
       <Routes>
         <Route index element={<Home />} />
         <Route path="/services" element={<Service />} />
+        <Route path="/movie/:id" element={<Movie />} />
       </Routes>
     </BrowserRouter>
   )

@@ -11,7 +11,7 @@ export default function MovieContent({ movie }) {
                 {movieItem.adult === false ? <p>Tout public</p> : <p>Adult</p>}
                 <p>{movieItem.original_language}</p>
             </div>
-            <h3>{movieItem.title}</h3>
+            {/* <h3>{movieItem.title}</h3>
             <p className="mov_ctn_overview">{movieItem.overview}</p>
             <div className="mov_ctn_info">
                 <div className="mov_ctn_ltlinfo">
@@ -22,7 +22,7 @@ export default function MovieContent({ movie }) {
                     <p>Note</p>
                     <p>{movieItem.vote_average}</p>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 
