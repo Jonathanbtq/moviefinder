@@ -12,22 +12,20 @@
 .mov_content_info h2{
     color: white;
 }
+.mov_content_dtl{
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+}
 .mov_content_dtl p{
     color: white;
 }
 .mov_content_dtl img{
     width: 30%;
+    margin: 0 20px 0 0;
 }
-.mov_dtl_note{
+.mov_ctn_dtl_rht{
     display: flex;
     flex-direction: column;
-    width: 100%;
-}
-.mov_dtl_nte{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-.mov_dtl_nte p{
-    color: white;
+    width: 50%;
 }

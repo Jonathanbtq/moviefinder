@@ -23,7 +23,6 @@ export default function Movie(){
             .then(response => response.json())
             .then(response => {
                 if (response) {
-                    console.log(response)
                     setMovieId(response);
                 }
             })
