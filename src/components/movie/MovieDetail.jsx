@@ -1,6 +1,6 @@
 export default function MovieDetail({ movie }){
-    console.log(movie.production_companies)
-    
+    console.log(movie.genres)
+
     return (
         <>
             <div className="movie_ctn">
@@ -13,21 +13,17 @@ export default function MovieDetail({ movie }){
                         />
                         <div className="mov_ctn_dtl_rht">
                             <p>{movie.release_date} en salle</p>
-                            {/* {movie.production_companies ?? 
-                                movie.production_companies.map((produc, index) => {
-                                    <p>Production : {produc.name}</p>
-                                })
-                            } */}
+                            {movie.production_companies && movie.production_companies.map((produc, index) => (
+                                <p key={index}>Production : {produc.name}</p>
+                            ))}
                             <p>{movie.homepage} </p>
                         </div>
                     </div>
                     <div className="mov_dtl_note">
                         <div className="mov_dtl_nte">
-                            {/* {movie.genres ??
-                                movie.genres.map((genre, index) => {
-                                    <p>genre.name</p>
-                                })
-                            } */}
+                            {movie.genres && movie.genres.map((genres, index) => (
+                                <p>{genres.name}</p>
+                            ))}
                             <p>{movie.tagline} </p>
                             <p>{movie.overview} </p>
                         </div>
