@@ -4,15 +4,15 @@ export default function MovieDetail({ movie }){
     console.log(movie)
     const [releaseYear, setReleaseYear] = useState('')
 
-    const getDate = () => {
-        const date = movie.release_date
-        const dateYear = date.split('-')[0]
-        setReleaseYear(dateYear)
-    }
+    // const getDate = () => {
+    //     const date = movie.release_date
+    //     const dateYear = date.split('-')[0]
+    //     setReleaseYear(dateYear)
+    // }
 
-    useEffect(() => {
-        getDate()
-    }, [])
+    // useEffect(() => {
+    //     getDate()
+    // }, [])
 
     return (
         <>
