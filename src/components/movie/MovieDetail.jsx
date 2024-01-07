@@ -1,5 +1,6 @@
 export default function MovieDetail({ movie }){
     console.log(movie.production_companies)
+    
     return (
         <>
             <div className="movie_ctn">
