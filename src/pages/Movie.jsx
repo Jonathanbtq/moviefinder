@@ -1,37 +1,45 @@
-export default function Movie({ movie }){
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import MovieDetail from "../components/movie/MovieDetail";
+
+import '../assets/styles/movie.css'
+
+export default function Movie(){
+    const param = useParams();
+    const [movie, setMovieId] = useState({})
+
+    const apiBaseUrl = 'https://api.themoviedb.org/3/movie';
+
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer your_access_token'
+        }
+    };
+
+    const findMovieId = () => {
+        fetch(`${apiBaseUrl}/${param.id}?language=fr&page=1&region=fr`, options)
+            .then(response => response.json())
+            .then(response => {
+                if (response) {
+                    console.log(response)
+                    setMovieId(response);
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching movie details:", error);
+            });
+    }
+
+    useEffect(() => {
+        findMovieId();
+    }, []);
+    
     return(
         <>
-            <div className="movie_ctn">
-                <div className="mov_content_info">
-                    <h2>{movie.title}</h2>
-                    <div className="mov_content_dtl">
-                        <img
-                            src={`https://image.tmdb.org/t/p/original/${movieItem.poster_path}`}
-                            alt={`Poster for ${movieItem.title}`}
-                        />
-                        <div className="mov_ctn_dtl_rht">
-                            <p>{movie.release_date} en salle</p>
-                            {production_companies ?? 
-                                production_companies.map((produc, index) => {
-                                    <p>Production : {produc.name}</p>
-                                })
-                            }
-                            <p>{movie.homepage} </p>
-                        </div>
-                    </div>
-                    <div className="mov_dtl_note">
-                        <div className="mov_dtl_nte">
-                            {movie.genres ??
-                                movie.genres.map((genre, index) => {
-                                    <p>genre.name</p>
-                                })
-                            }
-                            <p>{movie.tagline} </p>
-                            <p>{movie.overview} </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <p>{param.id}</p>
+            <MovieDetail movie={movie} />
         </>
-    )
+    );
 }

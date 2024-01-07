@@ -1,0 +1,33 @@
+.movie_ctn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.mov_content_info{
+    display: flex;
+    flex-direction: column;
+    width: 73vw;
+}
+.mov_content_info h2{
+    color: white;
+}
+.mov_content_dtl p{
+    color: white;
+}
+.mov_content_dtl img{
+    width: 30%;
+}
+.mov_dtl_note{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.mov_dtl_nte{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.mov_dtl_nte p{
+    color: white;
+}
