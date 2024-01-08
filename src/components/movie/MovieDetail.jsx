@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import JaugeMovieScore from "./JaugeMovieScore"
 
 export default function MovieDetail({ movie }){
     console.log(movie)
     const [releaseYear, setReleaseYear] = useState('')
     const [pourcentageVote, setPourcentageVote] = useState()
-    
+
+    useEffect(() => {
+        if(movie.vote_average){
+            const pourcentage = movie.vote_average.toFixed(1);
+            setPourcentageVote(Math.max(0, Math.min(100, pourcentage)));
+        }
+    }, [movie])
     // const getDate = () => {
     //     const date = movie.release_date
     //     const dateYear = date.split('-')[0]
@@ -42,7 +49,7 @@ export default function MovieDetail({ movie }){
                                         <p>{genres.name}</p>
                                     ))}
                             </div>
-                            <p>{movie.vote_average && movie.vote_average.toFixed(1)}</p>
+                            <JaugeMovieScore pourcentageVote={pourcentageVote} setPourcentageVote={setPourcentageVote} />
                             <div className="mov_dtl_nte">
                                 <h3>Compagnie :</h3>
                                 <div className="mov_ctn_dtl_rht_compagnie">
