@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 
 export default function MovieDetail({ movie }){
     console.log(movie)
     const [releaseYear, setReleaseYear] = useState('')
-
+    const [pourcentageVote, setPourcentageVote] = useState()
+    
     // const getDate = () => {
     //     const date = movie.release_date
     //     const dateYear = date.split('-')[0]
@@ -19,23 +21,40 @@ export default function MovieDetail({ movie }){
             <div className="movie_ctn">
                 <div className="mov_content_info">
                     <div className="mov_content_dtl">
-                        <img
-                            src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-                            alt={`Poster for ${movie.title}`}
-                        />
+                        <div className="mov_ctn_dtl_imglnk">
+                            <img
+                                src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                                alt={`Poster for ${movie.title}`}
+                            />
+                            { movie.homepage && 
+                                <Link to={movie.homepage}>
+                                    <button>
+                                        <p>Disponible en streaming</p>
+                                        <p>Regarder maintenant</p>
+                                    </button>
+                                </Link>
+                            }
+                        </div>
                         <div className="mov_ctn_dtl_rht">
-                            <h2>{movie.title} {releaseYear}</h2>
-                            <p>{movie.release_date} en salle</p>
-                            {movie.production_companies && movie.production_companies.map((produc, index) => (
-                                <p key={index}>Production : {produc.name}</p>
-                            ))}
-                            <p>{movie.homepage} </p>
+                            <h2>{movie.title} ({movie.release_date && movie.release_date.split('-')[0]})</h2>
+                            <div className="mov_dtl_nte_genre">
+                                    {movie.genres && movie.genres.map((genres, index) => (
+                                        <p>{genres.name}</p>
+                                    ))}
+                            </div>
+                            <p>{movie.vote_average && movie.vote_average.toFixed(1)}</p>
                             <div className="mov_dtl_nte">
-                                {movie.genres && movie.genres.map((genres, index) => (
-                                    <p>{genres.name}</p>
-                                ))}
-                                <p>{movie.tagline} </p>
-                                <p>{movie.overview} </p>
+                                <h3>Compagnie :</h3>
+                                <div className="mov_ctn_dtl_rht_compagnie">
+                                    {movie.production_companies && movie.production_companies.map((produc, index) => (
+                                        <p key={index}>{produc.name}</p>
+                                    ))}
+                                </div>
+                                <div className="mov_overview">
+                                    <p>{movie.tagline} </p>
+                                    <h3>Synopsis</h3>
+                                    <p className="mov_overview_p">{movie.overview}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
