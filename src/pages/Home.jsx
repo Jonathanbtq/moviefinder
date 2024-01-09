@@ -7,6 +7,7 @@ import '../assets/styles/moviecontent.css'
 import '../assets/styles/menubutton.css'
 import '../assets/styles/searshbar.css'
 import '../assets/styles/pages/home.css'
+import '../assets/styles/nav/nav.css'
 import '../main.css'
 
 export default function Home(){
