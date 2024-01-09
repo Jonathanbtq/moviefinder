@@ -37,7 +37,6 @@ export default function Movie(){
     
     return(
         <>
-            <p>{param.id}</p>
             <MovieDetail movie={movie} />
         </>
     );
