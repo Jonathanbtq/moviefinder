@@ -26,3 +26,6 @@
     margin: 0;
     font-size: 15px;
 }
+.active_btn{
+    background-color: rgba(252, 6, 6, 0.589) !important;
+}

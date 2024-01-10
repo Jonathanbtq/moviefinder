@@ -51,7 +51,7 @@ export default function Home(){
             <div className="home_ctn">
                 {/* <h1 className="home_h1">Trouve ton film en quelques secondes</h1> */}
                 <SearshBar updateMovie={setMovie} options={options} />
-                <MenuButton updateMovie={setMovie}  options={options}/>
+                <MenuButton updateMovie={setMovie}  options={options} />
                 <MovieContent movie={movie} />
             </div>
         </>

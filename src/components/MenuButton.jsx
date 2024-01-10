@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react";
+
 export default function MenuButton({ updateMovie }){
+    const [selectedCategory, setSelectedCategory] = useState('')
 
     const apiBaseUrl = 'https://api.themoviedb.org/3/movie';
 
@@ -10,7 +13,7 @@ export default function MenuButton({ updateMovie }){
         }
     };
 
-    const fetchData = async (baseurl) => {
+    const fetchData = async (baseurl, state) => {
         fetch(baseurl, options)
             .then(response => response.json())
             .then(response => {
@@ -22,6 +25,7 @@ export default function MenuButton({ updateMovie }){
     }
     
     const handleRandomMovie = () => {
+        setSelectedCategory('random')
         fetch(`${apiBaseUrl}/popular?language=fr&page=1&region=fr`, options)
             .then(response => response.json())
             .then(response => {
@@ -55,28 +59,43 @@ export default function MenuButton({ updateMovie }){
     const changeMovieButton = (state) => {
         switch (state) {
             case 'upcoming':
+                setSelectedCategory('upcoming');
+                fetchData(`${apiBaseUrl}/${state}?language=fr&page=1&region=fr`, state)
+                break
             case 'top_rated':
+                setSelectedCategory('top_rated');
+                fetchData(`${apiBaseUrl}/${state}?language=fr&page=1&region=fr`, state)
+                break
             case 'now_playing':
-                fetchData(`${apiBaseUrl}/${state}?language=fr&page=1&region=fr`, options)
+                setSelectedCategory('now_playing');
+                fetchData(`${apiBaseUrl}/${state}?language=fr&page=1&region=fr`, state)
                 break
             default:
                 break
         }
     }
-
+    
     return (
         <>
             <div className="button_div">
-                <button onClick={() => changeMovieButton('top_rated')}>
+                <button
+                    className={`${selectedCategory === 'top_rated' ? 'active_btn' : ''}`}
+                    onClick={() => changeMovieButton('top_rated')}>
                     <p>Top Rated</p>
                 </button>
-                <button onClick={() => changeMovieButton('now_playing')}>
+                <button
+                    className={`${selectedCategory === 'now_playing' ? 'active_btn' : ''}`}
+                    onClick={() => changeMovieButton('now_playing')}>
                     <p>En diffusion</p>
                 </button>
-                <button onClick={() => changeMovieButton('upcoming')}>
+                <button
+                    className={`${selectedCategory === 'upcoming' ? 'active_btn' : ''}`}
+                    onClick={() => changeMovieButton('upcoming')}>
                     <p>A venir</p>
                 </button>
-                <button onClick={() => handleRandomMovie()}>
+                <button
+                    className={`${selectedCategory === 'random' ? 'active_btn' : ''}`}
+                    onClick={() => handleRandomMovie()}>
                     <p>Aléatoire</p>
                 </button>
             </div>
