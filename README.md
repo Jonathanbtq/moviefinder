@@ -3,7 +3,7 @@ MovieFinder --- ReactJs
 Website use for find new movies, check incoming and top rated movies.
 This website, give you aleatoir movie.
 
-![movieFinder](https://github.com/Jonathanbtq/moviefinder/assets/99287239/f3d9e45e-b81c-4022-aafa-30f96fbe7601)
+![movieFinder](https://github.com/Jonathanbtq/moviefinder/assets/99287239/46190e9c-0158-42b6-bf62-f3ff433b3d76)
 
 # React + Vite
 
